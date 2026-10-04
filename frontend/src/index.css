@@ -1,0 +1,438 @@
+@import "tailwindcss";
+
+/* ============================================================
+   UX4G CDN — Government Design System
+   Version: 3.3.0 (loaded via link tag in index.html)
+   Custom theme token overrides applied below.
+   ============================================================ */
+
+/* ============================================================
+   DESIGN TOKENS — Family Career Counselling
+   ============================================================ */
+@theme {
+  /* Primary Colors */
+  --color-primary: #0B73B9;
+  --color-primary-hover: #0A5F9A;
+  --color-primary-active: #094E80;
+  --color-primary-light: #E8F4FD;
+
+  /* Navy / Structural */
+  --color-navy: #123B63;
+  --color-navy-dark: #0D2B4A;
+
+  /* Neutrals */
+  --color-ink: #101214;
+  --color-white: #FFFFFF;
+  --color-surface: #F7F8FA;
+  --color-surface-alt: #EEF0F4;
+  --color-border: #1D2630;
+  --color-border-light: #D0D5DD;
+  --color-muted: #667085;
+  --color-muted-light: #98A2B3;
+
+  /* Status Colors */
+  --color-success: #18864B;
+  --color-success-light: #E8F5EE;
+  --color-concern: #D95D50;
+  --color-concern-light: #FDF2F1;
+  --color-warning: #D99800;
+  --color-warning-light: #FEF9EC;
+  --color-accent: #D9A441;
+  --color-info: #0B73B9;
+  --color-info-light: #E8F4FD;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-devanagari: 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Shadows — Neo-brutalist offset style */
+  --shadow-card: 3px 3px 0px rgba(0,0,0,0.10);
+  --shadow-card-hover: 4px 4px 0px rgba(0,0,0,0.15);
+  --shadow-card-active: 1px 1px 0px rgba(0,0,0,0.10);
+  --shadow-focus: 0 0 0 2px #0B73B9;
+  --shadow-focus-offset: 0 0 0 4px rgba(11,115,185,0.20);
+
+
+
+  /* Border Radius */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-default: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+
+  /* Border Width */
+  --border-default: 1px;
+  --border-strong: 1.5px;
+  --border-thicker: 2px;
+}
+
+/* ============================================================
+   UX4G Theme Token Overrides
+   As required by §0.6 of the UX4G contract:
+   Override tokens at :root using !important.
+   ============================================================ */
+:root {
+  --ux4g-color-primary-600: #0B73B9 !important;
+  --ux4g-color-primary-700: #0A5F9A !important;
+  --ux4g-color-primary-800: #094E80 !important;
+  data-theme: light;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hindi / Devanagari: increase line height for readability */
+:lang(hi) {
+  font-family: 'Noto Sans', var(--font-sans);
+  line-height: 1.8;
+}
+
+/* Tamil: increase line height for readability */
+:lang(ta) {
+  font-family: 'Noto Sans', var(--font-sans);
+  line-height: 1.8;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+#root {
+  display: block;
+  width: 100%;
+}
+
+/* ============================================================
+   FOCUS TREATMENT — UX4G-compliant, 44×44px minimum targets
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   SKIP LINK — Accessibility
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================================
+   CARD — Neo-brutalist with UX4G token-compatible borders
+   (Custom: UX4G provides layered shadows; we need offset shadow)
+   ============================================================ */
+.card {
+  background: var(--color-white);
+  border: var(--border-strong) solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card-interactive:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+.card-interactive:active {
+  box-shadow: var(--shadow-card-active);
+  transform: translateY(1px);
+}
+
+/* ============================================================
+   EVIDENCE CARD — Visually distinct from AI responses
+   ============================================================ */
+.evidence-card {
+  background: #F8FDFB;
+  border: var(--border-strong) solid #18864B;
+  border-radius: var(--radius-md);
+  box-shadow: 2px 2px 0px rgba(24,134,75,0.12);
+}
+
+.evidence-header {
+  background: #18864B;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   AI RESPONSE CARD — Visually distinct from evidence
+   ============================================================ */
+.ai-card {
+  background: #F0F7FF;
+  border: var(--border-strong) solid var(--color-primary);
+  border-radius: var(--radius-md);
+  box-shadow: 2px 2px 0px rgba(11,115,185,0.12);
+}
+
+.ai-header {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   INSTITUTIONAL HEADER
+   ============================================================ */
+.institutional-header {
+  background: var(--color-navy);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.institutional-header-bar {
+  background: #0D2B4A;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ============================================================
+   STATUS BADGES
+   ============================================================ */
+.badge-concern {
+  background: var(--color-concern-light);
+  color: #A0312A;
+  border: 1px solid #F5C6C3;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+.badge-success {
+  background: var(--color-success-light);
+  color: #0F5C30;
+  border: 1px solid #B8E8CC;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+.badge-warning {
+  background: var(--color-warning-light);
+  color: #A07000;
+  border: 1px solid #FDDCA0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+.badge-info {
+  background: var(--color-info-light);
+  color: #065390;
+  border: 1px solid #BFE0F5;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+.badge-neutral {
+  background: var(--color-surface-alt);
+  color: var(--color-muted);
+  border: 1px solid var(--color-border-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+
+
+/* ============================================================
+   CAREER PATHWAY VISUALIZATION
+   (Custom: UX4G doesn't provide branching pathway viz)
+   ============================================================ */
+.pathway-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.pathway-node {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+}
+
+.pathway-node.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.pathway-connector {
+  width: 2px;
+  min-height: 40px;
+  background: var(--color-border-light);
+  margin: 0 auto;
+}
+
+.pathway-connector.completed {
+  background: var(--color-success);
+}
+
+/* ============================================================
+   CONFIDENCE INDICATOR
+   (Custom: UX4G doesn't provide composite confidence bars)
+   ============================================================ */
+.confidence-bar {
+  height: 8px;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+}
+
+.confidence-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+}
+
+.confidence-fill.low { background: var(--color-concern); width: 25%; }
+.confidence-fill.moderate { background: var(--color-warning); width: 60%; }
+.confidence-fill.high { background: var(--color-success); width: 90%; }
+
+/* ============================================================
+   CHAT MESSAGES
+   ============================================================ */
+.chat-message {
+  animation: fadeInUp 0.2s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   THREE-COLUMN COUNSELLING LAYOUT
+   ============================================================ */
+.counselling-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  gap: 0;
+  min-height: calc(100vh - 140px);
+}
+
+@media (max-width: 1280px) {
+  .counselling-layout {
+    grid-template-columns: 240px 1fr 280px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .counselling-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+/* ============================================================
+   SIMPLE MODE — Larger text, simpler UI
+   ============================================================ */
+.simple-mode {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.simple-mode h1, .simple-mode h2 {
+  font-size: 2rem;
+}
+
+.simple-mode button {
+  min-height: 56px;
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
+}
+
+/* ============================================================
+   SCROLLBAR — Neutral, non-distracting
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-light);
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  .institutional-header,
+  .skip-link,
+  nav,
+  footer {
+    display: none;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+}
