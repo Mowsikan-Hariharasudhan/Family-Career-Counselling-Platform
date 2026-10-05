@@ -92,7 +92,7 @@ export interface FamilyProfile {
 
 // ─── Counselling Session Types ────────────────────────────────
 export type MessageRole = 'user' | 'assistant' | 'system';
-export type MessageSource = 'ai_gemini' | 'ai_fallback' | 'structured_data';
+export type MessageSource = 'ai_gemini' | 'gemini_api' | 'ai_fallback' | 'structured_data';
 export type SentimentLevel = 'high_concern' | 'moderate' | 'low_concern';
 export type ConfidenceLevel = 'low' | 'moderate' | 'high';
 

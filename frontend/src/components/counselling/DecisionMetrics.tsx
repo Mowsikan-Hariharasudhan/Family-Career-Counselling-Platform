@@ -59,11 +59,11 @@ export const SentimentIndicator: React.FC<{
   const renderIcon = (level: SentimentLevel) => {
     switch (level) {
       case 'high_concern':
-        return <Frown className="w-4 h-4 text-[#D95D50]" />;
+        return <Frown className="w-3.5 h-3.5 text-[#D95D50] flex-shrink-0" />;
       case 'moderate':
-        return <Meh className="w-4 h-4 text-[#D99800]" />;
+        return <Meh className="w-3.5 h-3.5 text-[#D99800] flex-shrink-0" />;
       case 'low_concern':
-        return <Smile className="w-4 h-4 text-[#18864B]" />;
+        return <Smile className="w-3.5 h-3.5 text-[#18864B] flex-shrink-0" />;
     }
   };
 
@@ -80,22 +80,28 @@ export const SentimentIndicator: React.FC<{
 
   return (
     <div
-      className={`bg-white border border-[#D0D5DD] rounded p-2.5 text-xs flex items-center justify-between shadow-[2px_2px_0px_rgba(0,0,0,0.06)] ${className}`}
+      className={`bg-[#F7F8FA] border border-[#D0D5DD] rounded-lg p-2 text-xs shadow-[1px_1px_0px_rgba(0,0,0,0.04)] ${className}`}
     >
-      <div className="flex items-center gap-2">
-        <span className="text-[#667085] font-medium">Initial Mindset:</span>
-        <span className="flex items-center gap-1 font-semibold text-[#101214]">
-          {renderIcon(sentimentBefore)}
-          <span>{getLabel(sentimentBefore)}</span>
-        </span>
-      </div>
-      <span className="text-[#667085] font-bold">→</span>
-      <div className="flex items-center gap-2">
-        <span className="text-[#667085] font-medium">Current Status:</span>
-        <span className="flex items-center gap-1 font-semibold text-[#101214]">
-          {renderIcon(sentimentAfter)}
-          <span>{getLabel(sentimentAfter)}</span>
-        </span>
+      <div className="grid grid-cols-2 gap-2 text-[11px]">
+        <div className="bg-white p-2 rounded border border-[#D0D5DD] space-y-1">
+          <span className="text-[#667085] text-[10px] block font-medium uppercase tracking-wider">
+            Initial Mindset
+          </span>
+          <span className="flex items-center gap-1 font-bold text-[#101214] truncate">
+            {renderIcon(sentimentBefore)}
+            <span className="truncate">{getLabel(sentimentBefore)}</span>
+          </span>
+        </div>
+
+        <div className="bg-white p-2 rounded border border-[#0B73B9]/30 bg-sky-50/50 space-y-1">
+          <span className="text-[#0B73B9] text-[10px] block font-medium uppercase tracking-wider">
+            Current Status
+          </span>
+          <span className="flex items-center gap-1 font-bold text-[#101214] truncate">
+            {renderIcon(sentimentAfter)}
+            <span className="truncate">{getLabel(sentimentAfter)}</span>
+          </span>
+        </div>
       </div>
     </div>
   );

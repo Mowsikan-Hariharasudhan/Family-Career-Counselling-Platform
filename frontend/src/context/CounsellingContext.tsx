@@ -17,6 +17,7 @@ import { DEMO_FAMILY_PROFILE, DEMO_SESSION } from '../data/demoUser';
 import { TRADES } from '../data/trades';
 import { detectIntent, detectScriptLanguage } from '../utils/intentDetector';
 import { getFallbackResponse } from '../data/responseFallbacks';
+import { generateGeminiResponse } from '../services/geminiService';
 import { useTranslation } from 'react-i18next';
 
 interface CounsellingContextType {
@@ -200,10 +201,31 @@ export const CounsellingProvider: React.FC<{ children: React.ReactNode }> = ({
     addConcern(intent);
     setIsTyping(true);
 
-    // Simulate AI response delay
-    setTimeout(() => {
-      const responseText = getFallbackResponse(intent, activeLang, selectedTrade);
+    try {
+      const geminiRes = await generateGeminiResponse(
+        text,
+        activeLang,
+        selectedTrade,
+        profile,
+        intent,
+        messages
+      );
 
+      const aiMsg: ChatMessage = {
+        id: `ai-${Date.now()}`,
+        role: 'assistant',
+        content: geminiRes.text,
+        language: activeLang,
+        detectedIntent: intent,
+        evidenceRef: selectedTrade.id,
+        source: geminiRes.source,
+        timestamp: new Date(),
+      };
+
+      setMessages((prev) => [...prev, aiMsg]);
+    } catch (err) {
+      console.error('Error generating AI response:', err);
+      const responseText = getFallbackResponse(intent, activeLang, selectedTrade, text);
       const aiMsg: ChatMessage = {
         id: `ai-${Date.now()}`,
         role: 'assistant',
@@ -214,17 +236,15 @@ export const CounsellingProvider: React.FC<{ children: React.ReactNode }> = ({
         source: 'ai_fallback',
         timestamp: new Date(),
       };
-
       setMessages((prev) => [...prev, aiMsg]);
+    } finally {
       setIsTyping(false);
-
-      // Positive reassurance gradually improves confidence
       setDecisionConfidence((prev) => {
         if (prev === 'low') return 'moderate';
         return 'high';
       });
       setSentimentAfter('low_concern');
-    }, 700);
+    }
   };
 
   const session: CounsellingSession = {

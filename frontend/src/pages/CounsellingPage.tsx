@@ -17,11 +17,11 @@ export const CounsellingPage: React.FC = () => {
   const [isEscalationOpen, setIsEscalationOpen] = useState(false);
 
   return (
-    <div className="space-y-4">
+    <div className="w-full space-y-4">
       {/* 3-Column Workspace Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start w-full">
         {/* Left Column (Family Profile, Active Trade, Detected Concerns) */}
-        <div className="lg:col-span-3 space-y-4">
+        <div className="lg:col-span-3 w-full space-y-4">
           <FamilyContextPanel
             language={currentLang}
             onOpenEscalation={() => setIsEscalationOpen(true)}
@@ -29,12 +29,12 @@ export const CounsellingPage: React.FC = () => {
         </div>
 
         {/* Center Column (Multi-turn Conversational AI Dialogue) */}
-        <div className="lg:col-span-6">
+        <div className="lg:col-span-6 w-full">
           <CounsellingChat language={currentLang} />
         </div>
 
         {/* Right Column (Vocational Outcome Evidence Ground Truth) */}
-        <div className="lg:col-span-3 space-y-4">
+        <div className="lg:col-span-3 w-full space-y-4">
           <OutcomeEvidencePanel language={currentLang} />
         </div>
       </div>

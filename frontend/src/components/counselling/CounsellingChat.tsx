@@ -54,7 +54,7 @@ export const CounsellingChat: React.FC<CounsellingChatProps> = ({ language }) =>
   };
 
   return (
-    <div className="flex flex-col h-[750px] bg-white border-2 border-[#1D2630] rounded-lg shadow-[3px_3px_0px_#1D2630] overflow-hidden">
+    <div className="flex flex-col w-full h-[750px] bg-white border-2 border-[#1D2630] rounded-lg shadow-[3px_3px_0px_#1D2630] overflow-hidden">
       {/* 1. Chat Header */}
       <div className="bg-[#123B63] text-white p-3.5 flex items-center justify-between border-b-2 border-[#1D2630]">
         <div className="flex items-center gap-2.5">
